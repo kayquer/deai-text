@@ -69,19 +69,20 @@ deai-text/
 
 #### Claude Code (CLI)
 
-Clone the repo and install:
+Clone the repo into your project's `.claude/skills/` directory:
 
 ```bash
-git clone https://github.com/kayquer/deai-text.git
-claude install-skill ./deai-text
+mkdir -p your-project/.claude/skills
+git clone https://github.com/kayquer/deai-text.git your-project/.claude/skills/deai-text
 ```
 
-Or copy the folder into your project's `.claude/skills/` directory:
+Or if you already cloned it somewhere else, just copy it:
 
 ```bash
-git clone https://github.com/kayquer/deai-text.git
 cp -r deai-text/ your-project/.claude/skills/deai-text/
 ```
+
+Claude Code reads skills from `.claude/skills/` — no install command needed.
 
 #### Claude Desktop (Cowork mode)
 
@@ -97,7 +98,7 @@ your-selected-folder/
             └── prompts/
 ```
 
-Claude will pick it up automatically on the next conversation.
+Claude picks it up on the next conversation.
 
 #### Other LLMs with skill/plugin support
 
@@ -199,19 +200,20 @@ deai-text/
 
 #### Claude Code (CLI)
 
-Clone o repositorio e instale:
+Clone o repositorio direto na pasta `.claude/skills/` do seu projeto:
 
 ```bash
-git clone https://github.com/kayquer/deai-text.git
-claude install-skill ./deai-text
+mkdir -p seu-projeto/.claude/skills
+git clone https://github.com/kayquer/deai-text.git seu-projeto/.claude/skills/deai-text
 ```
 
-Ou copie a pasta para o diretorio `.claude/skills/` do seu projeto:
+Ou se ja clonou em outro lugar, copie:
 
 ```bash
-git clone https://github.com/kayquer/deai-text.git
 cp -r deai-text/ seu-projeto/.claude/skills/deai-text/
 ```
+
+O Claude Code le skills de `.claude/skills/` automaticamente — nao precisa de comando de instalacao.
 
 #### Claude Desktop (modo Cowork)
 
@@ -280,7 +282,7 @@ Ao auditar, nao cace palavras individualmente. Pergunte: quantas vezes isso apar
 
 ## Inspirations / Inspiracoes
 
-This skill was built on the shoulders of two projects:
+This skill draws from two projects:
 
 - **[BANNED: The Definitive Guide](https://www.reddit.com/r/WritingWithAI/comments/1pecxos/i_constructed_an_exhaustive_anticlich%C3%A9_style/)** — An exhaustive anti-cliche style guide by u/Aggressive_Chicken63 on r/WritingWithAI. A personal catalog of constructions, words, phrases, and patterns to ban from AI-assisted writing. The structural constructions (Part 1), fiction phrases (Part 2), and the accumulation principle (Part 3) in this skill draw heavily from that work.
 
