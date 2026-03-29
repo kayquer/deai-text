@@ -55,14 +55,16 @@ The skill uses a tiered vocabulary system (words that are always AI tells vs. wo
 ```
 deai-text/
 ├── SKILL.md                          # Main skill — audit logic, output format, detection method
-├── references/
-│   ├── vocabulary.md                 # Tier 1/2/3 word tables with replacements
-│   ├── constructions.md              # 31 structural patterns (fiction + general)
-│   ├── fiction-phrases.md            # Physical tells, dead metaphors, cliches
-│   └── nonfiction-patterns.md        # Formatting, transitions, chatbot artifacts
-└── prompts/
-    ├── standalone-en.md              # Condensed prompt for any LLM (English)
-    └── standalone-pt-br.md           # Condensed prompt for any LLM (PT-BR)
+├── LICENSE                           # MIT license
+├── skills/
+│   ├── references/
+│   │   ├── vocabulary.md             # Tier 1/2/3 word tables with replacements
+│   │   ├── constructions.md          # 31 structural patterns (fiction + general)
+│   │   ├── fiction-phrases.md        # Physical tells, dead metaphors, cliches
+│   │   └── nonfiction-patterns.md    # Formatting, transitions, chatbot artifacts
+│   └── prompts/
+│       ├── standalone-en.md          # Condensed prompt for any LLM (English)
+│       └── standalone-pt-br.md       # Condensed prompt for any LLM (PT-BR)
 ```
 
 ### Installation
@@ -94,8 +96,8 @@ your-selected-folder/
     └── skills/
         └── deai-text/
             ├── SKILL.md
-            ├── references/
-            └── prompts/
+            ├── LICENSE
+            └── skills/
 ```
 
 Claude picks it up on the next conversation.
@@ -134,8 +136,8 @@ The skill triggers automatically when it detects these kinds of requests.
 
 If your LLM doesn't support skills, you can use a condensed prompt that works on ChatGPT, Gemini, Llama, Mistral, or any other model. Paste it as a system prompt or prepend it to your message.
 
-- **English**: [`prompts/standalone-en.md`](prompts/standalone-en.md)
-- **Portugues BR**: [`prompts/standalone-pt-br.md`](prompts/standalone-pt-br.md)
+- **English**: [`skills/prompts/standalone-en.md`](skills/prompts/standalone-en.md)
+- **Portugues BR**: [`skills/prompts/standalone-pt-br.md`](skills/prompts/standalone-pt-br.md)
 
 You can also paste the full `SKILL.md` content directly as a system prompt for the complete experience with all reference catalogs.
 
@@ -225,8 +227,8 @@ sua-pasta-selecionada/
     └── skills/
         └── deai-text/
             ├── SKILL.md
-            ├── references/
-            └── prompts/
+            ├── LICENSE
+            └── skills/
 ```
 
 O Claude detecta automaticamente na proxima conversa.
@@ -255,8 +257,8 @@ A skill dispara automaticamente ao detectar esse tipo de pedido.
 
 Se o seu LLM nao suporta skills, use um prompt condensado que funciona no ChatGPT, Gemini, Llama, Mistral ou qualquer outro modelo. Cole como system prompt ou antes da sua mensagem.
 
-- **English**: [`prompts/standalone-en.md`](prompts/standalone-en.md)
-- **Portugues BR**: [`prompts/standalone-pt-br.md`](prompts/standalone-pt-br.md)
+- **English**: [`skills/prompts/standalone-en.md`](skills/prompts/standalone-en.md)
+- **Portugues BR**: [`skills/prompts/standalone-pt-br.md`](skills/prompts/standalone-pt-br.md)
 
 Voce tambem pode colar o conteudo completo do `SKILL.md` como system prompt para a experiencia completa com todos os catalogos de referencia.
 

@@ -17,9 +17,9 @@ The user will provide a piece of writing. Your job:
 
 Before you begin, read whichever reference files are relevant to the text you're auditing:
 
-- **All text types**: always read `references/vocabulary.md` (AI word clusters and replacements)
-- **Fiction / creative prose**: also read `references/constructions.md` (structural patterns) and `references/fiction-phrases.md` (physical tells, dead metaphors, clichés)
-- **Non-fiction / articles / reports / marketing**: also read `references/nonfiction-patterns.md` (formatting, transitions, structure)
+- **All text types**: always read `skills/references/vocabulary.md` (AI word clusters and replacements)
+- **Fiction / creative prose**: also read `skills/references/constructions.md` (structural patterns) and `skills/references/fiction-phrases.md` (physical tells, dead metaphors, clichés)
+- **Non-fiction / articles / reports / marketing**: also read `skills/references/nonfiction-patterns.md` (formatting, transitions, structure)
 
 The reference files contain the full catalogs of patterns. Read them before auditing — they are your detection dictionary.
 
@@ -63,7 +63,7 @@ Decide whether to **patch** or **rewrite from scratch**:
 
 ## The Tiered Vocabulary System
 
-Words are organized into three tiers by how reliably they signal AI-generated text (full lists in `references/vocabulary.md`):
+Words are organized into three tiers by how reliably they signal AI-generated text (full lists in `skills/references/vocabulary.md`):
 
 - **Tier 1 — Always flag.** Words that appear 5–20x more often in AI text than human text. Replace on sight: *delve, landscape (metaphor), tapestry, paradigm, robust, comprehensive, seamless, leverage, utilize, pivotal, meticulous, cutting-edge, nestled, vibrant, thriving, bustling, holistic, actionable, impactful, game-changer, watershed moment.*
 
@@ -75,7 +75,7 @@ Words are organized into three tiers by how reliably they signal AI-generated te
 
 ## Fiction-Specific Detection
 
-When auditing fiction or creative prose, also check for these categories (full catalogs in `references/constructions.md` and `references/fiction-phrases.md`):
+When auditing fiction or creative prose, also check for these categories (full catalogs in `skills/references/constructions.md` and `skills/references/fiction-phrases.md`):
 
 - **Structural patterns**: sequential action pairs ("X, then Y"), triple-beat lists, staccato verb fragments, trailing participle pile-ups, echo-line poetics, negation formulas
 - **Physical tells used as emotion substitutes**: jaw clenching, throat working, breath catching, pupils blown, hands curling into fists — the same autonomic responses applied to every character interchangeably
@@ -89,7 +89,7 @@ When auditing fiction or creative prose, also check for these categories (full c
 
 ## Non-Fiction Detection
 
-When auditing articles, reports, blog posts, or marketing copy, also check (full patterns in `references/nonfiction-patterns.md`):
+When auditing articles, reports, blog posts, or marketing copy, also check (full patterns in `skills/references/nonfiction-patterns.md`):
 
 - **Formatting**: em dash overuse (target: zero; hard max: one per 1,000 words), bold overuse, emoji in headers, excessive bullet lists
 - **Template phrases**: "a [adjective] step towards [adjective] [noun]" — slot-fill constructions that sound the same no matter what fills the blanks
