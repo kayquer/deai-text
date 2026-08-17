@@ -4,6 +4,8 @@ These are syntactic and structural patterns that weaken prose through mechanical
 
 **Core Principle:** Every construction here substitutes form for content. The fix is always: name what's actually happening, show consequence, or cut.
 
+**Rule ID:** everything here is `AI-10`, cited with the construction number — `AI-10 (C-5)` for a triple-beat list. The three exceptions belong to `AI-12` (intrusive narration): **13. Atmospheric Front-Loading**, **26. Elegant Variation**, **28. Superficial Analysis as Narration**.
+
 ---
 
 ## Table of Contents

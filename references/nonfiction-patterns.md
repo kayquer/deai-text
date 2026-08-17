@@ -2,6 +2,18 @@
 
 Patterns specific to articles, blog posts, reports, marketing copy, and other non-fiction writing. These complement the vocabulary catalog (which applies to all text types).
 
+**Rule IDs** — cite these in the audit table (`SKILL.md` § Rule IDs):
+
+| ID | Sections in this file |
+|---|---|
+| `AI-6` | Formatting Issues · Excessive Structure |
+| `AI-7` | Transition Phrases · Template Phrases · False Ranges · Formulaic Challenges |
+| `AI-8` | Chatbot Artifacts · "Let's" Constructions · Sycophantic Tone · Acknowledgment Loops · Reasoning Chain Artifacts · Cutoff Disclaimers |
+| `AI-9` | Copula Avoidance · Vague Attributions · Significance Inflation · Promotional Language · Confidence Calibration · Generic Conclusions · Notability Name-Dropping |
+| `AI-10` | Sentence Structure Issues · Compulsive Rule of Three |
+| `AI-11` | Emotional Flatline |
+| `AI-12` | Synonym Cycling · Superficial -ing Analyses |
+
 ---
 
 ## Formatting Issues
