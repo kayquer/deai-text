@@ -48,7 +48,56 @@ Resultado da rodada 1: **22/24, 3 instáveis, 2 vermelhos.** Um dos vermelhos er
 
 ## Achados abertos
 
-### A-1 · `AI-8` sobredispara em imperativo legítimo — **falso positivo real**
+### A-2 · `AI-6` proíbe o primeiro travessão de textos curtos — **falso positivo real**
+
+Medido: `caso-19` roda **4/5** com `DEAI_TENTATIVAS=1`. O FAIL imprime `corrigiu indevidamente: —`.
+
+Não é asserção frágil. `nonfiction-patterns.md` § Em Dashes diz *"Target: zero. Hard max: one per
+1,000 words"*. A entrada do `caso-19` tem ~90 palavras e um travessão deliberado, o que estoura o
+orçamento declarado por um fator de dez. Uma em cada cinco rodadas a skill obedece a régua ao pé da
+letra — e está certa, dado o texto da regra.
+
+O orçamento por mil palavras é uma medida de **densidade** aplicada como se fosse **limite
+absoluto**. Em qualquer texto abaixo de mil palavras ele proíbe o primeiro travessão, e o primeiro
+travessão nunca é o problema: a acumulação é. Contradiz o Princípio da Acumulação, que é a tese
+central da skill.
+
+Conserto provável (outra sessão): separar as duas coisas. O piso — nenhum texto é marcado por um
+único travessão, independente do tamanho — e a densidade, que só passa a valer acima de N
+travessões. Gate: `caso-19` medido 5/5 com `DEAI_TENTATIVAS=1`, e um caso positivo novo provando
+que travessão em rajada continua sendo marcado.
+
+(Só o A-2. Ver "descartado" abaixo.)
+
+## Achado descartado pela medição
+
+### `AI-7` — **não é achado**
+
+`caso-20` ficou FLAKY na rodada 1 e parecia a mesma família do A-1 e do A-2. Medido 5× com
+`DEAI_TENTATIVAS=1`: **5/5**. O FLAKY era oscilação normal do modelo, não sobredisparo da regra.
+
+Vale o registro porque a hipótese estava escrita e era plausível — "os três FLAKY são o mesmo
+padrão, não três acidentes". Eram dois padrões e um acidente. Medir custou 5 chamadas e evitou
+mexer numa regra que está certa, que é o modo de falha que este repo inteiro existe para não
+cometer.
+
+## Achados fechados
+
+### A-1 · `AI-8` sobredisparava em imperativo legítimo — **fechado**
+
+**Diagnóstico corrigido.** A hipótese inicial era que o catálogo não tinha a distinção. Ele tinha:
+`nonfiction-patterns.md` § "Let's" Constructions já dizia *"functioning as a transition rather than
+a genuine invitation to act"*. O que faltava era exemplo do lado certo — quatro exemplos do lado
+errado e zero do outro, e a lista vence a cláusula.
+
+Conserto: tabela `Flag | Leave alone` nos dois catálogos, com o teste de portabilidade que já
+existia em `fiction-phrases.md` ("se caberia sem mudança em outro texto, não está fazendo
+trabalho"). Não foi princípio novo — foi aplicar um princípio que o repo já tinha.
+
+Gate rodado: `caso-22` (era FAIL 3/3) PASS · `caso-23` (era FLAKY) PASS · `caso-03` e `caso-04`
+continuam disparando `AI-8` — sem falso negativo simétrico.
+
+### Histórico do A-1 (diagnóstico original)
 
 `caso-22-contra-ai8-en-imperativo` falhou **3/3**: `corrigiu indevidamente: Let's start with`. A
 entrada é uma explicação técnica que abre com `Let's start with the smallest case that still
