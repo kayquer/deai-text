@@ -1,0 +1,13 @@
+{
+  "name": "deai-text",
+  "version": "0.2.0",
+  "description": "Audits and rewrites text to remove AI writing patterns. Bilingual catalogs (EN + PT-BR), 12 rule IDs, regression suite.",
+  "author": {
+    "name": "Kayque Rotondo",
+    "url": "https://github.com/kayquer"
+  },
+  "homepage": "https://github.com/kayquer/deai-text",
+  "license": "MIT",
+  "keywords": ["writing", "editing", "ai-detection", "portuguese", "prose"],
+  "skills": ["."]
+}
