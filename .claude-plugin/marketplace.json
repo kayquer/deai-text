@@ -1,0 +1,17 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "deai-text",
+  "description": "Remove AI writing patterns from any text — fiction, articles, marketing copy, reports. English and Brazilian Portuguese.",
+  "owner": {
+    "name": "Kayque Rotondo",
+    "url": "https://github.com/kayquer"
+  },
+  "plugins": [
+    {
+      "name": "deai-text",
+      "description": "Audits text for AI writing patterns and rewrites it to sound human. 12 rule IDs, separate EN and PT-BR catalogs, regression suite.",
+      "source": "./",
+      "category": "writing"
+    }
+  ]
+}

@@ -4,6 +4,8 @@ Specific words and phrases that weaken fiction and creative prose through overus
 
 **Core Principle:** If a word or phrase could appear unchanged across any character, any genre, any story — it's doing no work. Cut it.
 
+**Rule ID:** everything here is `AI-11` (emotion by proxy), except four sections that belong to `AI-12` (intrusive narration): **Narrator-as-Analyst Phrases**, **Cinematic Wallpaper**, **Description Clichés**, **Ending Clichés**.
+
 ---
 
 ## Physical Tells (Emotion Substitutes)

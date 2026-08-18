@@ -2,6 +2,10 @@
 
 Words are organized into three tiers based on how reliably they signal AI-generated text. This tiered approach reduces false positives on words that are fine in isolation but suspicious in clusters.
 
+**Rule IDs:** Tier 1 is `AI-1`, Tier 2 is `AI-2`, Tier 3 and the adverb list are `AI-3`. The two fiction lists at the end are `AI-3` as well — they are density lists, not always-flag lists.
+
+This catalog is **English**. For Portuguese text, read `vocabulary-pt-br.md` instead; the same three IDs apply.
+
 ---
 
 ## Tier 1 — Always Replace

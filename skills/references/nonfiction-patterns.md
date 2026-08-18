@@ -2,6 +2,18 @@
 
 Patterns specific to articles, blog posts, reports, marketing copy, and other non-fiction writing. These complement the vocabulary catalog (which applies to all text types).
 
+**Rule IDs** — cite these in the audit table (`SKILL.md` § Rule IDs):
+
+| ID | Sections in this file |
+|---|---|
+| `AI-6` | Formatting Issues · Excessive Structure |
+| `AI-7` | Transition Phrases · Template Phrases · False Ranges · Formulaic Challenges |
+| `AI-8` | Chatbot Artifacts · "Let's" Constructions · Sycophantic Tone · Acknowledgment Loops · Reasoning Chain Artifacts · Cutoff Disclaimers |
+| `AI-9` | Copula Avoidance · Vague Attributions · Significance Inflation · Promotional Language · Confidence Calibration · Generic Conclusions · Notability Name-Dropping |
+| `AI-10` | Sentence Structure Issues · Compulsive Rule of Three |
+| `AI-11` | Emotional Flatline |
+| `AI-12` | Synonym Cycling · Superficial -ing Analyses |
+
 ---
 
 ## Formatting Issues
@@ -83,7 +95,19 @@ Remove entirely:
 
 ## "Let's" Constructions
 
-"Let's explore," "Let's take a look," "Let's break this down," "Let's examine" — AI uses "let's" as a false-collaborative opener. It's filler that delays the actual point. Just start with the point. Flag any "let's + verb" functioning as a transition rather than a genuine invitation to act.
+"Let's explore," "Let's take a look," "Let's break this down," "Let's examine" — AI uses "let's" as a false-collaborative opener. It's filler that delays the actual point. Just start with the point.
+
+**Where this rule does not live.** "Let's" is not the tell. The tell is a clause that could open any text on any subject. Apply the portability test used throughout these catalogs: if the phrase would fit unchanged in a different article, it is doing no work.
+
+| Flag | Leave alone |
+|---|---|
+| Let's dive in! | Let's start with the smallest case that still breaks: two goroutines, one map, no mutex. |
+| Let's explore this together. | Let's assume the index fits in memory — it doesn't, but the math is easier. |
+| Let's break this down step by step. | Let's take the 2019 filing, since it's the last one before the restatement. |
+
+The right-hand column names something specific: a case, an assumption, a document. Delete the "let's" clause and you lose the instruction. The left-hand column names nothing; delete it and you lose a stall.
+
+A teacher writing "Let's start with X" where X is real content is not producing a chatbot artifact. Flagging it is the false positive this rule most often creates.
 
 ---
 
