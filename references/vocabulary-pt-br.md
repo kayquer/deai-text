@@ -221,6 +221,22 @@ O conserto quase nunca é trocar o conector. É juntar os dois parágrafos, ou c
 | Vamos por partes · Vamos destrinchar isso |
 | Até onde vai meu conhecimento · Não tenho informações atualizadas sobre |
 
+**Onde esta regra NÃO mora.** O tique não é o `Vamos`. É a oração que serviria igual em qualquer
+texto sobre qualquer assunto. Vale o mesmo teste de portabilidade do resto dos catálogos: se a
+frase caberia sem mudança em outro artigo, ela não está fazendo trabalho.
+
+| Marque | Deixe em paz |
+|---|---|
+| Vamos mergulhar! | Vamos supor que o corretor tenha 400 imóveis na carteira. |
+| Vamos explorar isso juntos | Vamos pelo caso mais simples: um índice só, sem partição. |
+| Vamos por partes | Vamos usar a declaração de 2019, que é a última antes da retificação. |
+
+A coluna da direita nomeia algo específico — uma hipótese, um caso, um documento. Tire a oração e
+some a instrução. A da esquerda não nomeia nada; tire e some uma enrolação.
+
+Quem ensina escrevendo `Vamos supor que…` com hipótese de verdade não está produzindo artefato de
+chatbot. Marcar isso é o falso positivo que esta regra mais gera.
+
 ---
 
 ## Inflação e linguagem promocional (`AI-9`)

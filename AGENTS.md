@@ -190,6 +190,19 @@ nenhum: ele conta como cobertura.
 | `## entrada` vazia | o modelo recebia um prompt sem texto para auditar |
 | termo de `nao-marca` que não está na entrada | um termo ausente do texto não sobrevive a nada: 3 chamadas de API para reportar um falso positivo inexistente |
 
+## O que o harness NÃO cobre
+
+A suíte testa o comportamento **dado que** a skill disparou — o runner injeta `SKILL.md` +
+`references/*.md` no prompt por stdin. Ela não testa **se** a skill dispara.
+
+Isso deixa o `description` do frontmatter sem verificação nenhuma, e ele é justamente o campo que
+esta AGENTS.md manda não mexer sem intenção. Uma edição que estreite o `description` passa por toda
+a suíte em verde e mesmo assim faz a skill parar de ser invocada.
+
+O mecanismo nativo para isso é `claude plugin eval` com casos `should_trigger` — em early access e
+indisponível nesta conta na data em que o harness foi escrito. Quando liberar, é `evals/` na raiz.
+Até lá, o gatilho é verificado só por uso.
+
 ## Loops
 
 `loops/goal-cobertura.md` é um goal loop. Rode com `/loop` sem intervalo — o modelo se auto-pauta e
