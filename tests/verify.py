@@ -40,7 +40,7 @@ BILINGUES = {"1", "2", "3", "7", "8", "9"}
 def carregar_skill():
     """Concatena a skill do repo. Testa o arquivo em edição, não o instalado."""
     partes = [REPO / "SKILL.md"]
-    partes += sorted((REPO / "references").glob("*.md"))
+    partes += sorted((REPO / "skills" / "references").glob("*.md"))
     faltando = [p for p in partes if not p.exists()]
     if faltando:
         sys.exit(f"erro: arquivo da skill não encontrado: {faltando[0]}")

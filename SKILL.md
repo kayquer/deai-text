@@ -22,9 +22,9 @@ is not optional — the catalogs do not overlap.
 
 | Language | Vocabulary catalog |
 |---|---|
-| English | `references/vocabulary.md` |
-| Portuguese (BR) | `references/vocabulary-pt-br.md` |
-| Anything else | `references/vocabulary.md` for the loanwords, and say in section 3 that the catalog does not cover this language |
+| English | `skills/references/vocabulary.md` |
+| Portuguese (BR) | `skills/references/vocabulary-pt-br.md` |
+| Anything else | `skills/references/vocabulary.md` for the loanwords, and say in section 3 that the catalog does not cover this language |
 
 The Portuguese catalog is not a translation of the English one. Half of what marks AI text in
 Portuguese has no English equivalent — the trailing gerund, `possui` standing in for `tem`, the
@@ -33,8 +33,8 @@ one finds almost nothing.
 
 Then, by genre:
 
-- **Fiction / creative prose**: also read `references/constructions.md` (structural patterns) and `references/fiction-phrases.md` (physical tells, dead metaphors, clichés)
-- **Non-fiction / articles / reports / marketing**: also read `references/nonfiction-patterns.md` (formatting, transitions, structure)
+- **Fiction / creative prose**: also read `skills/references/constructions.md` (structural patterns) and `skills/references/fiction-phrases.md` (physical tells, dead metaphors, clichés)
+- **Non-fiction / articles / reports / marketing**: also read `skills/references/nonfiction-patterns.md` (formatting, transitions, structure)
 
 The reference files contain the full catalogs of patterns. Read them before auditing — they are your detection dictionary.
 
@@ -115,7 +115,7 @@ Decide whether to **patch** or **rewrite from scratch**:
 
 ## The Tiered Vocabulary System
 
-Words are organized into three tiers by how reliably they signal AI-generated text (full lists in `references/vocabulary.md`):
+Words are organized into three tiers by how reliably they signal AI-generated text (full lists in `skills/references/vocabulary.md`):
 
 - **`AI-1` — Always flag.** Words that appear 5–20x more often in AI text than human text. Replace on sight: *delve, landscape (metaphor), tapestry, paradigm, robust, comprehensive, seamless, leverage, utilize, pivotal, meticulous, cutting-edge, nestled, vibrant, thriving, bustling, holistic, actionable, impactful, game-changer, watershed moment.*
 
@@ -127,7 +127,7 @@ Words are organized into three tiers by how reliably they signal AI-generated te
 
 ## Fiction-Specific Detection
 
-When auditing fiction or creative prose, also check for these categories (full catalogs in `references/constructions.md` and `references/fiction-phrases.md`):
+When auditing fiction or creative prose, also check for these categories (full catalogs in `skills/references/constructions.md` and `skills/references/fiction-phrases.md`):
 
 - **`AI-10` Structural patterns**: sequential action pairs ("X, then Y"), triple-beat lists, staccato verb fragments, trailing participle pile-ups, echo-line poetics, negation formulas
 - **`AI-11` Physical tells used as emotion substitutes**: jaw clenching, throat working, breath catching, pupils blown, hands curling into fists — the same autonomic responses applied to every character interchangeably
@@ -141,7 +141,7 @@ When auditing fiction or creative prose, also check for these categories (full c
 
 ## Non-Fiction Detection
 
-When auditing articles, reports, blog posts, or marketing copy, also check (full patterns in `references/nonfiction-patterns.md`):
+When auditing articles, reports, blog posts, or marketing copy, also check (full patterns in `skills/references/nonfiction-patterns.md`):
 
 - **`AI-6` Formatting**: em dash overuse (target: zero; hard max: one per 1,000 words), bold overuse, emoji in headers, excessive bullet lists
 - **`AI-6` Excessive structure**: too many headers in short text (3+ in under 300 words), 8+ bullet points in under 200 words, formulaic section headers ("Overview," "Key Points," "Summary")

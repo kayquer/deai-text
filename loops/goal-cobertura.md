@@ -39,7 +39,7 @@ Pare quando **qualquer uma** ocorrer:
 
 **Não altere** para fazer a matriz fechar:
 
-- `SKILL.md` e `references/*.md` — o objetivo é cobrir a skill com testes, não mudar a skill. Se um
+- `SKILL.md` e `skills/references/*.md` — o objetivo é cobrir a skill com testes, não mudar a skill. Se um
   contra-teste revelar falso positivo real, **pare e reporte**; corrigir o catálogo é outra sessão.
 - `tests/verify.py` — mexer no avaliador para o caso passar é fraudar a verificação.
 - Casos existentes — só adicione. Alterar `espera:` de caso que já existe mascara regressão.

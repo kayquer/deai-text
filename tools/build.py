@@ -3,7 +3,7 @@
 
 Duas coisas, e só duas:
 
-  bundle       SKILL.md + references/*.md achatados num arquivo só, para colar em
+  bundle       SKILL.md + skills/references/*.md achatados num arquivo só, para colar em
                LLM que não tem suporte a skill. É GERADO — não edite `bundle.md`.
 
   --verificar  confere que os prompts avulsos (`standalone-*.md`), que são
@@ -21,16 +21,16 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-BUNDLE = REPO / "prompts" / "bundle.md"
+BUNDLE = REPO / "skills" / "prompts" / "bundle.md"
 AVULSOS = ["standalone-en.md", "standalone-pt-br.md"]
 
 CABECALHO = """<!-- GERADO por tools/build.py — não edite este arquivo.
-     Edite SKILL.md / references/*.md e rode `python3 tools/build.py`. -->
+     Edite SKILL.md / skills/references/*.md e rode `python3 tools/build.py`. -->
 
 # deai-text — bundle completo
 
 A skill inteira num arquivo só, para colar como system prompt em qualquer LLM.
-Onde o texto abaixo mandar "read `references/X.md`", a seção correspondente já
+Onde o texto abaixo mandar "read `skills/references/X.md`", a seção correspondente já
 está neste mesmo arquivo, mais abaixo.
 
 ---
@@ -39,7 +39,7 @@ está neste mesmo arquivo, mais abaixo.
 
 
 def fontes():
-    partes = [REPO / "SKILL.md"] + sorted((REPO / "references").glob("*.md"))
+    partes = [REPO / "SKILL.md"] + sorted((REPO / "skills" / "references").glob("*.md"))
     faltando = [p for p in partes if not p.exists()]
     if faltando:
         sys.exit(f"erro: arquivo da skill não encontrado: {faltando[0]}")
@@ -75,15 +75,15 @@ def verificar():
 
     ids = ids_do_skill()
     for nome in AVULSOS:
-        caminho = REPO / "prompts" / nome
+        caminho = REPO / "skills" / "prompts" / nome
         if not caminho.exists():
-            problemas.append(f"prompts/{nome} não existe")
+            problemas.append(f"skills/prompts/{nome} não existe")
             continue
         texto = caminho.read_text(encoding="utf-8")
         faltando = [f"AI-{n}" for n in ids if f"AI-{n}" not in texto]
         if faltando:
             problemas.append(
-                f"prompts/{nome} não cita {', '.join(faltando)} — "
+                f"skills/prompts/{nome} não cita {', '.join(faltando)} — "
                 f"regra nova no SKILL.md que não chegou no prompt avulso")
 
     if problemas:

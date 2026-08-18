@@ -49,18 +49,20 @@ Two things make it more than a word blacklist:
 ```
 deai-text/
 ├── SKILL.md                          # rule IDs, detection method, output format
-├── references/
-│   ├── vocabulary.md                 # Tier 1/2/3, English
-│   ├── vocabulary-pt-br.md           # Tier 1/2/3, Portuguese + gerund, copula, calques
-│   ├── constructions.md              # 31 structural patterns
-│   ├── fiction-phrases.md            # physical tells, dead metaphors, clichés
-│   └── nonfiction-patterns.md        # formatting, transitions, assistant artifacts
-├── prompts/
-│   ├── standalone-en.md              # condensed prompt for any LLM (English)
-│   ├── standalone-pt-br.md           # condensed prompt for any LLM (PT-BR)
-│   └── bundle.md                     # GENERATED: the whole skill in one file
+├── skills/
+│   ├── references/
+│   │   ├── vocabulary.md             # Tier 1/2/3, English
+│   │   ├── vocabulary-pt-br.md       # Tier 1/2/3, Portuguese + gerund, copula, calques
+│   │   ├── constructions.md          # 31 structural patterns
+│   │   ├── fiction-phrases.md        # physical tells, dead metaphors, clichés
+│   │   └── nonfiction-patterns.md    # formatting, transitions, assistant artifacts
+│   └── prompts/
+│       ├── standalone-en.md          # condensed prompt for any LLM (English)
+│       ├── standalone-pt-br.md       # condensed prompt for any LLM (PT-BR)
+│       └── bundle.md                 # GENERATED: the whole skill in one file
 ├── tests/                            # regression suite — see AGENTS.md
 ├── loops/                            # coverage goal loop
+├── LICENSE
 └── AGENTS.md                         # for editing the skill itself
 ```
 
@@ -91,7 +93,7 @@ Claude picks it up on the next session. Same layout works for Claude Desktop —
 
 #### Any other LLM
 
-Paste `prompts/bundle.md` as a system prompt — it is `SKILL.md` plus every catalog flattened into one file. If your context budget is tight, `prompts/standalone-en.md` is the condensed version.
+Paste `skills/prompts/bundle.md` as a system prompt — it is `SKILL.md` plus every catalog flattened into one file. If your context budget is tight, `skills/prompts/standalone-en.md` is the condensed version.
 
 ### Usage
 
@@ -181,7 +183,7 @@ O Claude detecta na próxima sessão. O mesmo layout serve para o Claude Desktop
 
 #### Qualquer outro LLM
 
-Cole `prompts/bundle.md` como system prompt — é o `SKILL.md` mais todos os catálogos num arquivo só. Se o contexto for curto, `prompts/standalone-pt-br.md` é a versão condensada.
+Cole `skills/prompts/bundle.md` como system prompt — é o `SKILL.md` mais todos os catálogos num arquivo só. Se o contexto for curto, `skills/prompts/standalone-pt-br.md` é a versão condensada.
 
 ### Como usar
 
