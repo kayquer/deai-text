@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-labelledby="title desc">
+  <title id="title">deai-text</title>
+  <desc id="desc">Skill que acha padrões de escrita de IA, cita cada um com o ID da regra e reescreve o texto. Exemplo de auditoria: AI-10 marca o gerúndio final "garantindo mais segurança", AI-9 marca "possui" no lugar de "tem", AI-1 marca o decalque "assertiva" e AI-7 marca o conector de enchimento "Ademais".</desc>
+
+  <rect width="1200" height="420" rx="24" fill="#F4EFE4"/>
+
+  <g id="title-block" transform="translate(64 0)">
+    <text x="0" y="96" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" letter-spacing="1.5" fill="#7A7266">SKILL · CLAUDE CODE · QUALQUER LLM</text>
+    <text x="-3" y="186" font-family="Georgia, 'Times New Roman', serif" font-size="84" font-weight="700" fill="#1C1A17">deai-text</text>
+    <rect x="0" y="208" width="72" height="6" rx="3" fill="#B4361E"/>
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="26" fill="#3A362F">
+      <text x="0" y="266">Acha padrões de escrita de IA,</text>
+      <text x="0" y="302">cita cada um com o ID da regra</text>
+      <text x="0" y="338">e reescreve o texto.</text>
+    </g>
+    <text x="0" y="380" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#7A7266">12 regras · catálogos PT-BR e EN</text>
+  </g>
+
+  <g id="audit" transform="translate(584 48)">
+    <rect x="6" y="8" width="546" height="324" rx="14" fill="#E4DCCB"/>
+    <rect x="0" y="0" width="546" height="324" rx="14" fill="#FFFDF8"/>
+    <text x="32" y="44" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" letter-spacing="1.5" fill="#9A9184">1. AUDITORIA</text>
+    <line x1="0" y1="64" x2="546" y2="64" stroke="#EFE8DA" stroke-width="1.5"/>
+
+    <g font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="20" font-weight="700" fill="#B4361E">
+      <text x="32" y="110">AI-10</text>
+      <text x="32" y="158">AI-9</text>
+      <text x="32" y="206">AI-1</text>
+      <text x="32" y="254">AI-7</text>
+    </g>
+    <g font-family="Georgia, 'Times New Roman', serif" font-size="23" fill="#1C1A17">
+      <text x="122" y="110">“garantindo mais segurança”</text>
+      <text x="122" y="158">“possui”</text>
+      <text x="122" y="206">“assertiva”</text>
+      <text x="122" y="254">“Ademais”</text>
+    </g>
+    <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="19" fill="#7A7266" text-anchor="end">
+      <text x="514" y="158">→ tem</text>
+      <text x="514" y="206">decalque</text>
+      <text x="514" y="254">enchimento</text>
+    </g>
+
+    <line x1="0" y1="278" x2="546" y2="278" stroke="#EFE8DA" stroke-width="1.5"/>
+    <text x="32" y="308" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="17" fill="#9A9184">2. reescrita · 3. o que mudou · 4. segunda passada</text>
+  </g>
+</svg>

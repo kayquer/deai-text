@@ -1,8 +1,17 @@
-# deai-text
+<p align="center">
+  <img src="./assets/readme/hero.svg" width="100%" alt="deai-text: acha padrões de escrita de IA, cita cada um com o ID da regra e reescreve o texto. Exemplo de auditoria: AI-10 gerúndio final, AI-9 possui no lugar de tem, AI-1 decalque, AI-7 conector de enchimento">
+</p>
 
-Remove padrões de escrita de IA de qualquer texto. Ficção, artigos, copy de marketing, relatórios — se parece que uma máquina escreveu, essa skill encontra os padrões e corrige.
+Remove padrões de escrita de IA de ficção, artigo, copy de marketing e relatório. Para cada padrão, cita o trecho com o ID da regra, reescreve o texto e relê a reescrita.
 
-*Removes AI writing patterns from any text. Fiction, articles, marketing copy, reports.* → [English](#english)
+*Removes AI writing patterns from any text, citing each one with a rule ID.* → [English](#english)
+
+```bash
+claude plugin marketplace add kayquer/deai-text
+claude plugin install deai-text
+```
+
+Outras formas de instalar, inclusive como system prompt em qualquer LLM: [Instalação](#instalação).
 
 ---
 
