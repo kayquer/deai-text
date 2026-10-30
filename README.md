@@ -2,9 +2,11 @@
   <img src="./assets/readme/hero.svg" width="100%" alt="deai-text: acha padrões de escrita de IA, cita cada um com o ID da regra e reescreve o texto. Exemplo de auditoria: AI-10 gerúndio final, AI-9 possui no lugar de tem, AI-1 decalque, AI-7 conector de enchimento">
 </p>
 
-Remove padrões de escrita de IA de ficção, artigo, copy de marketing e relatório. Para cada padrão, cita o trecho com o ID da regra, reescreve o texto e relê a reescrita.
+# deai-text
 
-*Removes AI writing patterns from any text, citing each one with a rule ID.* → [English](#english)
+O **deai-text** é uma skill do Claude Code que remove padrões de escrita de IA de textos em português do Brasil e em inglês: ficção, artigo, copy de marketing e relatório. Para cada padrão, cita o trecho com o ID da regra, reescreve o texto e relê a reescrita. Também roda como system prompt em qualquer outro LLM.
+
+*deai-text is a Claude Code skill that removes AI writing patterns from Portuguese and English text, citing each one with a rule ID.* → [English](#english)
 
 ```bash
 claude plugin marketplace add kayquer/deai-text
@@ -204,6 +206,23 @@ O runner **não compara texto** — output de LLM não é determinístico, e aqu
 
 **Leia o [`AGENTS.md`](AGENTS.md) antes de editar qualquer coisa.** Este repositório contém slop de IA de propósito — é a entrada dos testes. Um agente que "melhora" o texto de `tests/casos/` quebra a suíte em silêncio: os testes continuam rodando e passam a não detectar nada.
 
+### Perguntas frequentes
+
+**O deai-text é um detector de texto de IA?**
+Não. Ele não calcula a probabilidade de um texto ter sido gerado por IA. Ele aponta padrões concretos (gerúndio final, `possui` no lugar de `tem`, conector de enchimento, tique de chatbot), cita cada um com um ID de regra e reescreve o trecho.
+
+**Funciona em português?**
+Sim. O catálogo em português do Brasil é próprio, não tradução do inglês. Ele cobre padrões que não existem em inglês, como o gerúndio final e decalques como `alavancar` e `acionável`.
+
+**Precisa do Claude Code?**
+Não. No Claude Code ele instala como plugin. Em qualquer outro LLM (ChatGPT, Gemini e outros), cole `skills/prompts/bundle.md` como system prompt.
+
+**Como ele evita corrigir texto que já estava certo?**
+A suíte de regressão tem casos de `nao-marca`: termos corretos que precisam sobreviver à reescrita, como `robusto` em econometria e `possui` em matrícula de imóvel.
+
+**Qual a diferença para o Português Técnico Controlado?**
+O deai-text remove padrões de escrita de IA de qualquer texto. O [Português Técnico Controlado](https://github.com/kayquer/portugues-tecnico-controlado) reescreve texto técnico (runbook, documentação, procedimento) para ter uma leitura só. A regra PTC-9 do PTC adapta o catálogo do deai-text.
+
 ---
 
 ## English
@@ -267,6 +286,17 @@ DEAI_MODELO=opus ./init.sh    # different model (default: sonnet)
 The runner does not compare text — LLM output is not deterministic, and the product here is rewritten prose that changes every run by design. It checks three things: the expected rule IDs appeared, the `nao-marca` terms survived in section 2, and the `deve-conter` anchors appeared.
 
 **Read [`AGENTS.md`](AGENTS.md) before editing anything.** This repo contains AI slop on purpose — it is the test input. An agent that "improves" the text in `tests/casos/` breaks the suite silently: the tests keep running and stop detecting anything.
+
+### FAQ
+
+**Is deai-text an AI text detector?**
+No. It does not score how likely a text is to be AI-generated. It points out concrete patterns, cites each one with a rule ID and rewrites the passage.
+
+**Does it work outside Claude Code?**
+Yes. Paste `skills/prompts/bundle.md` as the system prompt in any LLM.
+
+**Which languages does it cover?**
+English and Brazilian Portuguese, each with its own catalog.
 
 ---
 
