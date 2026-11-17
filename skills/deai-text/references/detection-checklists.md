@@ -20,7 +20,7 @@ When auditing fiction or creative prose, also check for these categories (full c
 
 When auditing articles, reports, blog posts, or marketing copy, also check (full patterns in `references/nonfiction-patterns.md`):
 
-- **`AI-6` Formatting**: em dash overuse (target: zero; hard max: one per 1,000 words), bold overuse, emoji in headers, excessive bullet lists
+- **`AI-6` Formatting**: em dash accumulation (two or more in a paragraph, or more than one per 300 words; a single em dash is never a finding), bold overuse, emoji in headers, excessive bullet lists
 - **`AI-6` Excessive structure**: too many headers in short text (3+ in under 300 words), 8+ bullet points in under 200 words, formulaic section headers ("Overview," "Key Points," "Summary")
 - **`AI-7` Template phrases**: "a [adjective] step towards [adjective] [noun]" — slot-fill constructions that sound the same no matter what fills the blanks
 - **`AI-7` Transition filler**: "Moreover," "Furthermore," "Additionally," "In today's [X]," "It's worth noting that," "When it comes to," "At the end of the day"

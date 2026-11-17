@@ -668,7 +668,7 @@ When auditing fiction or creative prose, also check for these categories (full c
 
 When auditing articles, reports, blog posts, or marketing copy, also check (full patterns in `references/nonfiction-patterns.md`):
 
-- **`AI-6` Formatting**: em dash overuse (target: zero; hard max: one per 1,000 words), bold overuse, emoji in headers, excessive bullet lists
+- **`AI-6` Formatting**: em dash accumulation (two or more in a paragraph, or more than one per 300 words; a single em dash is never a finding), bold overuse, emoji in headers, excessive bullet lists
 - **`AI-6` Excessive structure**: too many headers in short text (3+ in under 300 words), 8+ bullet points in under 200 words, formulaic section headers ("Overview," "Key Points," "Summary")
 - **`AI-7` Template phrases**: "a [adjective] step towards [adjective] [noun]" — slot-fill constructions that sound the same no matter what fills the blanks
 - **`AI-7` Transition filler**: "Moreover," "Furthermore," "Additionally," "In today's [X]," "It's worth noting that," "When it comes to," "At the end of the day"
@@ -1040,7 +1040,16 @@ Patterns specific to articles, blog posts, reports, marketing copy, and other no
 ## Formatting Issues
 
 ### Em Dashes
-Target: zero. Hard max: one per 1,000 words. Replace with commas, periods, parentheses, or rewrite as two sentences. This applies to headings and titles too. Catch both the Unicode em dash (—) and the double-hyphen substitute (--).
+The tell is the habit, not the mark. A single em dash is never a finding, whatever the length of the text: a writer who uses one on purpose is not the problem, and removing it is the false positive this rule most often creates.
+
+Flag em dashes when they accumulate: two or more in the same paragraph, or more than one per 300 words across the text. Then replace them with commas, periods, parentheses, or two sentences, and leave at most one in the whole text. This applies to headings and titles too. Catch both the Unicode em dash (—) and the double-hyphen substitute (--); a command-line flag such as `--force` is not a dash.
+
+| Flag | Leave alone |
+|---|---|
+| The release is fast — really fast — and the team — all six of them — shipped it in a week. | The migration took two days — one for the schema, one for the backfill. |
+| Three short paragraphs, each with its own em dash aside. | One em dash in a 90-word README section. |
+
+Count before flagging. If the count is one, the dash stays in the rewrite.
 
 ### Bold Overuse
 Strip bold from most phrases. One bolded phrase per major section at most, or none. If something's important enough to bold, restructure the sentence to lead with it.

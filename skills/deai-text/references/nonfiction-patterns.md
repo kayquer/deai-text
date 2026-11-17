@@ -19,7 +19,16 @@ Patterns specific to articles, blog posts, reports, marketing copy, and other no
 ## Formatting Issues
 
 ### Em Dashes
-Target: zero. Hard max: one per 1,000 words. Replace with commas, periods, parentheses, or rewrite as two sentences. This applies to headings and titles too. Catch both the Unicode em dash (—) and the double-hyphen substitute (--).
+The tell is the habit, not the mark. A single em dash is never a finding, whatever the length of the text: a writer who uses one on purpose is not the problem, and removing it is the false positive this rule most often creates.
+
+Flag em dashes when they accumulate: two or more in the same paragraph, or more than one per 300 words across the text. Then replace them with commas, periods, parentheses, or two sentences, and leave at most one in the whole text. This applies to headings and titles too. Catch both the Unicode em dash (—) and the double-hyphen substitute (--); a command-line flag such as `--force` is not a dash.
+
+| Flag | Leave alone |
+|---|---|
+| The release is fast — really fast — and the team — all six of them — shipped it in a week. | The migration took two days — one for the schema, one for the backfill. |
+| Three short paragraphs, each with its own em dash aside. | One em dash in a 90-word README section. |
+
+Count before flagging. If the count is one, the dash stays in the rewrite.
 
 ### Bold Overuse
 Strip bold from most phrases. One bolded phrase per major section at most, or none. If something's important enough to bold, restructure the sentence to lead with it.

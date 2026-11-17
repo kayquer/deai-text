@@ -25,7 +25,8 @@ AI-4   Rhythm uniformity — sentences all 15–25 words, paragraphs all the sam
        Human writing mixes 3-word sentences with 30-word ones. Fragments work.
 AI-5   Absent voice — no first person, no opinion, no stated preference where one
        would be natural. AI is relentlessly neutral.
-AI-6   Formatting — em dash overuse (target zero, hard max one per 1,000 words),
+AI-6   Formatting — em dashes that accumulate (2+ in a paragraph, or more than one
+       per 300 words; a single em dash is never a finding),
        bold overuse, emoji in headers, bullet spam, 3+ headers in under 300 words,
        formulaic headers (Overview, Key Points, Summary)
 AI-7   Transition filler and template phrases — Moreover, Furthermore, Additionally,

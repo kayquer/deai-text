@@ -8,6 +8,7 @@ Uma linha por rodada. Objetivo e critério de parada em `goal-cobertura.md`.
 |---|---|---|---|---|---|
 | 0 | — | 8 casos seed | positivo 7/12 · contra-teste 0/12 | **8/8, exit 0** | harness montado; nenhum `FLAKY` na primeira rodada, `DEAI_TENTATIVAS=3`, sonnet |
 | 1 | todos | 16 casos (09–24) | **positivo 12/12 · contra-teste 12/12, exit 0** | 22/24, 3 flaky | matriz fechada; 1 achado real (A-1) e 1 defeito de caso corrigido |
+| 2 | `AI-6` | `caso-25` (positivo) | positivo 12/12 · contra-teste 12/12, exit 0 | **25/25, nenhum flaky** | A-2 fechado; `caso-19` 5/5 e `caso-25` 5/5 com `DEAI_TENTATIVAS=1` |
 
 Cobertura no fim da rodada 0:
 
@@ -48,7 +49,23 @@ Resultado da rodada 1: **22/24, 3 instáveis, 2 vermelhos.** Um dos vermelhos er
 
 ## Achados abertos
 
-### A-2 · `AI-6` proíbe o primeiro travessão de textos curtos — **falso positivo real**
+Nenhum.
+
+## Achado descartado pela medição
+
+### `AI-7` — **não é achado**
+
+`caso-20` ficou FLAKY na rodada 1 e parecia a mesma família do A-1 e do A-2. Medido 5× com
+`DEAI_TENTATIVAS=1`: **5/5**. O FLAKY era oscilação normal do modelo, não sobredisparo da regra.
+
+Vale o registro porque a hipótese estava escrita e era plausível — "os três FLAKY são o mesmo
+padrão, não três acidentes". Eram dois padrões e um acidente. Medir custou 5 chamadas e evitou
+mexer numa regra que está certa, que é o modo de falha que este repo inteiro existe para não
+cometer.
+
+## Achados fechados
+
+### A-2 · `AI-6` proíbe o primeiro travessão de textos curtos — **fechado**
 
 Medido: `caso-19` roda **4/5** com `DEAI_TENTATIVAS=1`. O FAIL imprime `corrigiu indevidamente: —`.
 
@@ -67,8 +84,6 @@ Conserto provável (outra sessão): separar as duas coisas. O piso — nenhum te
 travessões. Gate: `caso-19` medido 5/5 com `DEAI_TENTATIVAS=1`, e um caso positivo novo provando
 que travessão em rajada continua sendo marcado.
 
-(Só o A-2. Ver "descartado" abaixo.)
-
 **Remedido em 2026-11-16, `DEAI_TENTATIVAS=1`, sonnet:** `main` 2/5, branch `compat-harnesses` 0/5
 (v0.3: `SKILL.md` em `skills/deai-text/`, checklists de gênero movidos sem mudança de texto para
 `references/detection-checklists.md`). O caso piorou também no `main` (era 4/5), e 2/5 × 0/5 com
@@ -76,19 +91,15 @@ que travessão em rajada continua sendo marcado.
 prompt e pode pesar mais agora. O conserto continua sendo o do A-2, e o gate dele passa a valer
 também para o merge da v0.3.
 
-## Achado descartado pela medição
+**Conserto (2026-11-17).** `nonfiction-patterns.md` § Em Dashes separa o piso da densidade: um
+travessão sozinho nunca é achado, em texto de qualquer tamanho; marca-se quando acumulam (dois ou
+mais no mesmo parágrafo, ou mais de um a cada 300 palavras). Tabela `Flag | Leave alone`, como no
+A-1, com exemplo que não copia a entrada do `caso-19`. Mesma régua no `detection-checklists.md` e
+nos dois prompts avulsos.
 
-### `AI-7` — **não é achado**
-
-`caso-20` ficou FLAKY na rodada 1 e parecia a mesma família do A-1 e do A-2. Medido 5× com
-`DEAI_TENTATIVAS=1`: **5/5**. O FLAKY era oscilação normal do modelo, não sobredisparo da regra.
-
-Vale o registro porque a hipótese estava escrita e era plausível — "os três FLAKY são o mesmo
-padrão, não três acidentes". Eram dois padrões e um acidente. Medir custou 5 chamadas e evitou
-mexer numa regra que está certa, que é o modo de falha que este repo inteiro existe para não
-cometer.
-
-## Achados fechados
+Gate rodado com `DEAI_TENTATIVAS=1`, sonnet: `caso-19` **5/5** (era 0/5 no branch, 2/5 no `main`) ·
+`caso-25-pt-travessao-em-rajada` (positivo novo, sete travessões em ~70 palavras e nenhum outro
+problema de formatação) **5/5** — sem falso negativo simétrico.
 
 ### A-1 · `AI-8` sobredisparava em imperativo legítimo — **fechado**
 
@@ -128,7 +139,7 @@ seguido de complemento concreto e verificável é imperativo, não artefato. Ao 
 
 | Caso | Estado | Detalhe impresso | Leitura |
 |---|---|---|---|
-| `caso-19-contra-ai6-pt-referencia` | FLAKY (2ª de 3) | `corrigiu indevidamente: —` | o `AI-6` mira travessão em **zero**, então oscila entre respeitar e arrancar o único travessão deliberado. Ainda não decidido se é asserção frágil ou o mesmo defeito do A-1 noutra regra. Precisa de uma rodada com `DEAI_TENTATIVAS=1` 5× para medir. |
+| `caso-19-contra-ai6-pt-referencia` | FLAKY (2ª de 3) → fechado pelo A-2 | `corrigiu indevidamente: —` | o `AI-6` mira travessão em **zero**, então oscila entre respeitar e arrancar o único travessão deliberado. Ainda não decidido se é asserção frágil ou o mesmo defeito do A-1 noutra regra. Precisa de uma rodada com `DEAI_TENTATIVAS=1` 5× para medir. |
 | `caso-20-contra-ai7-en-contraste` | FLAKY (2ª de 3) | `corrigiu indevidamente: On the other hand` | mesma família: o catálogo lista o conector sem dizer que um conector único marcando o contraste real do texto é o uso correto. |
 | `caso-23-contra-ai8-pt-imperativo` | FLAKY (2ª de 3) | `corrigiu indevidamente: Vamos supor` | ver A-1 |
 
@@ -139,6 +150,7 @@ onde a forma é uso correto. O `SKILL.md` tem essa cláusula só para colisão e
 ## Falsos positivos reais encontrados
 
 - **A-1** (acima) — `AI-8` × imperativo legítimo. Confirmado 3/3 em inglês.
+- **A-2** (acima) — `AI-6` × travessão único em texto curto. Medido 4/5, depois 2/5 e 0/5.
 
 ## Defeitos de caso corrigidos
 
