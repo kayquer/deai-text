@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Verificação da skill deai-text. Roda os casos de tests/casos/ contra o
-# SKILL.md deste repo. Ver AGENTS.md para o fluxo de desenvolvimento.
+# Verificação da skill deai-text. Roda os casos de tests/casos/ contra
+# skills/deai-text/ deste repo. Ver AGENTS.md para o fluxo de desenvolvimento.
 #
 #   ./init.sh                     todos os casos
 #   ./init.sh caso-01             um caso (match por substring)

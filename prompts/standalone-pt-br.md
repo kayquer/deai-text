@@ -38,7 +38,8 @@ AI-4   Uniformidade de ritmo — frases todas com 15 a 25 palavras, parágrafos 
        mesmo tamanho. Texto humano mistura frase de 3 palavras com frase de 30.
 AI-5   Ausência de voz — sem primeira pessoa, sem opinião, sem preferência declarada
        onde caberia. IA é neutra até quando não devia ser.
-AI-6   Formatação — excesso de travessão (alvo: zero; teto: um a cada mil palavras),
+AI-6   Formatação — travessão acumulado (2+ no mesmo parágrafo, ou mais de um a cada
+       300 palavras; um travessão sozinho nunca é achado),
        excesso de negrito, emoji em título, lista com tudo virando bullet, 3+ títulos
        em menos de 300 palavras, títulos-fórmula (Visão geral, Pontos-chave, Conclusão)
 AI-7   Conectores de enchimento — Além disso, Ademais, Outrossim, Por fim, Nesse sentido,

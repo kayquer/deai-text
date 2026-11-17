@@ -4,7 +4,7 @@
 
 # deai-text
 
-O **deai-text** é uma skill do Claude Code que remove padrões de escrita de IA de textos em português do Brasil e em inglês: ficção, artigo, copy de marketing e relatório. Para cada padrão, cita o trecho com o ID da regra, reescreve o texto e relê a reescrita. Também roda como system prompt em qualquer outro LLM.
+O **deai-text** é uma skill para Claude Code, Codex, Copilot CLI, OpenCode, OpenClaw e Hermes que remove padrões de escrita de IA de textos em português do Brasil e em inglês: ficção, artigo, copy de marketing e relatório. Para cada padrão, cita o trecho com o ID da regra, reescreve o texto e relê a reescrita. Também roda como system prompt em qualquer outro LLM.
 
 *deai-text is a Claude Code skill that removes AI writing patterns from Portuguese and English text, citing each one with a rule ID.* → [English](#english)
 
@@ -142,25 +142,41 @@ claude plugin marketplace add kayquer/deai-text
 claude plugin install deai-text
 ```
 
-O repositório é o marketplace e o plugin ao mesmo tempo. `claude plugin details deai-text` mostra o que ele carrega.
+O repositório é o marketplace e o plugin ao mesmo tempo. `claude plugin details deai-text` mostra o que ele carrega. O mesmo `.claude-plugin/plugin.json` serve Codex, Copilot CLI e OpenClaw.
 
-#### Como skill pessoal
-
-```bash
-git clone https://github.com/kayquer/deai-text.git ~/.claude/skills/deai-text
-```
-
-#### Como skill de projeto
+#### No Hermes, como plugin
 
 ```bash
-git clone https://github.com/kayquer/deai-text.git seu-projeto/.claude/skills/deai-text
+hermes plugins install kayquer/deai-text
+hermes plugins enable deai-text
 ```
 
-O Claude detecta na próxima sessão. O mesmo layout serve para o Claude Desktop — coloque a pasta em `.claude/skills/` dentro da pasta que você selecionou.
+O Hermes lê o `plugin.json` da raiz (formato [Agent Plugins](https://agent-plugins.org/) v1) e instala o plugin desativado; o segundo comando ativa.
+
+#### Como skill, em qualquer agente
+
+A skill fica em `skills/deai-text/`. Copie essa pasta inteira, com `references/`, para a pasta de skills do seu agente:
+
+```bash
+git clone --depth 1 https://github.com/kayquer/deai-text.git /tmp/deai-text
+cp -r /tmp/deai-text/skills/deai-text ~/.claude/skills/
+```
+
+| Agente | Pasta de skills do usuário |
+|---|---|
+| Claude Code, Claude Desktop | `~/.claude/skills/` (de projeto: `.claude/skills/`) |
+| Codex, Copilot CLI, OpenClaw, OpenCode | `~/.agents/skills/` |
+| OpenCode | também lê `~/.claude/skills/` e `~/.config/opencode/skills/` |
+| OpenClaw | também lê `~/.openclaw/skills/` |
+| Hermes | `~/.hermes/skills/` |
+
+O agente detecta na próxima sessão. O OpenCode não instala plugin de manifesto, só skill.
+
+**Instalou antes da v0.3 com `git clone` direto em `~/.claude/skills/deai-text`?** Na v0.3 o `SKILL.md` saiu da raiz do repositório para `skills/deai-text/`, e um `git pull` nessa pasta deixa a skill sem `SKILL.md` na raiz. Apague a pasta e instale de novo com os comandos acima.
 
 #### Qualquer outro LLM
 
-Cole `skills/prompts/bundle.md` como system prompt — é o `SKILL.md` mais todos os catálogos num arquivo só. Se o contexto for curto, `skills/prompts/standalone-pt-br.md` é a versão condensada.
+Cole `prompts/bundle.md` como system prompt — é o `SKILL.md` mais todos os catálogos num arquivo só. Se o contexto for curto, `prompts/standalone-pt-br.md` é a versão condensada.
 
 ### Como usar
 
@@ -175,18 +191,22 @@ A skill dispara automaticamente nesse tipo de pedido.
 
 ```
 deai-text/
-├── SKILL.md                          # os IDs, método de detecção, formato de saída
-├── skills/
-│   ├── references/
-│   │   ├── vocabulary.md             # níveis 1/2/3, inglês
-│   │   ├── vocabulary-pt-br.md       # níveis 1/2/3, português + gerúndio, cópula, decalque
-│   │   ├── constructions.md          # 31 construções estruturais
-│   │   ├── fiction-phrases.md        # descrição física, metáfora morta, clichê
-│   │   └── nonfiction-patterns.md    # formatação, transição, artefato de assistente
-│   └── prompts/
-│       ├── standalone-en.md          # prompt condensado para qualquer LLM (inglês)
-│       ├── standalone-pt-br.md       # prompt condensado para qualquer LLM (PT-BR)
-│       └── bundle.md                 # GERADO: a skill inteira num arquivo só
+├── skills/deai-text/                 # a skill: é esta pasta que se instala
+│   ├── SKILL.md                      # os IDs, método de detecção, formato de saída
+│   └── references/
+│       ├── vocabulary.md             # níveis 1/2/3, inglês
+│       ├── vocabulary-pt-br.md       # níveis 1/2/3, português + gerúndio, cópula, decalque
+│       ├── constructions.md          # 31 construções estruturais
+│       ├── fiction-phrases.md        # descrição física, metáfora morta, clichê
+│       ├── nonfiction-patterns.md    # formatação, transição, artefato de assistente
+│       └── detection-checklists.md   # checklist de ficção e de não ficção, por ID
+├── prompts/
+│   ├── standalone-en.md              # prompt condensado para qualquer LLM (inglês)
+│   ├── standalone-pt-br.md           # prompt condensado para qualquer LLM (PT-BR)
+│   └── bundle.md                     # GERADO: a skill inteira num arquivo só
+├── .claude-plugin/                   # plugin: Claude Code, Codex, Copilot CLI, OpenClaw
+├── plugin.json                       # plugin Agent Plugins v1: Hermes
+├── tools/build.py                    # gera prompts/bundle.md e confere versões
 ├── tests/                            # suíte de regressão — ver AGENTS.md
 ├── loops/                            # goal loop de cobertura
 ├── LICENSE
@@ -215,7 +235,7 @@ Não. Ele não calcula a probabilidade de um texto ter sido gerado por IA. Ele a
 Sim. O catálogo em português do Brasil é próprio, não tradução do inglês. Ele cobre padrões que não existem em inglês, como o gerúndio final e decalques como `alavancar` e `acionável`.
 
 **Precisa do Claude Code?**
-Não. No Claude Code ele instala como plugin. Em qualquer outro LLM (ChatGPT, Gemini e outros), cole `skills/prompts/bundle.md` como system prompt.
+Não. No Claude Code ele instala como plugin. Em qualquer outro LLM (ChatGPT, Gemini e outros), cole `prompts/bundle.md` como system prompt.
 
 **Como ele evita corrigir texto que já estava certo?**
 A suíte de regressão tem casos de `nao-marca`: termos corretos que precisam sobreviver à reescrita, como `robusto` em econometria e `possui` em matrícula de imóvel.
@@ -261,14 +281,20 @@ Two things make it more than a word blacklist:
 claude plugin marketplace add kayquer/deai-text
 claude plugin install deai-text
 
-# As a personal skill
-git clone https://github.com/kayquer/deai-text.git ~/.claude/skills/deai-text
+# Hermes, as a plugin (Agent Plugins v1 plugin.json; installs disabled)
+hermes plugins install kayquer/deai-text
+hermes plugins enable deai-text
 
-# As a project skill
-git clone https://github.com/kayquer/deai-text.git your-project/.claude/skills/deai-text
+# As a skill, in any agent: copy skills/deai-text/ (with references/)
+git clone --depth 1 https://github.com/kayquer/deai-text.git /tmp/deai-text
+cp -r /tmp/deai-text/skills/deai-text ~/.claude/skills/
 ```
 
-For any other LLM, paste `skills/prompts/bundle.md` as a system prompt — it is `SKILL.md` plus every catalog flattened into one file. `skills/prompts/standalone-en.md` is the condensed version.
+Skill folders: `~/.claude/skills/` (Claude Code; OpenCode reads it too), `~/.agents/skills/` (Codex, Copilot CLI, OpenClaw, OpenCode), `~/.openclaw/skills/` (OpenClaw), `~/.hermes/skills/` (Hermes). `.claude-plugin/plugin.json` also serves Codex, Copilot CLI and OpenClaw; OpenCode installs skills, not manifest plugins.
+
+**Installed before v0.3 with a `git clone` straight into `~/.claude/skills/deai-text`?** `SKILL.md` moved from the repo root to `skills/deai-text/` in v0.3. Delete that folder and install again with the commands above.
+
+For any other LLM, paste `prompts/bundle.md` as a system prompt — it is `SKILL.md` plus every catalog flattened into one file. `prompts/standalone-en.md` is the condensed version.
 
 ### Usage
 
@@ -293,7 +319,7 @@ The runner does not compare text — LLM output is not deterministic, and the pr
 No. It does not score how likely a text is to be AI-generated. It points out concrete patterns, cites each one with a rule ID and rewrites the passage.
 
 **Does it work outside Claude Code?**
-Yes. Paste `skills/prompts/bundle.md` as the system prompt in any LLM.
+Yes. Paste `prompts/bundle.md` as the system prompt in any LLM.
 
 **Which languages does it cover?**
 English and Brazilian Portuguese, each with its own catalog.
