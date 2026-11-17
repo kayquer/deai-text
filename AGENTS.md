@@ -16,8 +16,8 @@ de trabalho, não defeitos:
 |---|---|
 | `tests/casos/*.md` | **entrada 100% slop de IA.** É o que os testes auditam. Limpar aqui faz o teste parar de testar. |
 | `tests/casos/caso-*-contra-*.md` | o oposto: texto **correto** que a skill não pode marcar. "melhorar" também quebra. |
-| `skills/references/*.md` | as colunas "Evite" / "Replace" das tabelas |
-| `SKILL.md` | os exemplos da tabela da seção 1 |
+| `skills/deai-text/references/*.md` | as colunas "Evite" / "Replace" das tabelas |
+| `skills/deai-text/SKILL.md` | os exemplos da tabela da seção 1 |
 
 Um agente que passa a própria skill no repo quebra a suíte **em silêncio**: os testes continuam
 rodando e passam a não detectar nada, porque a entrada deixou de ter o que detectar.
@@ -35,7 +35,7 @@ exemplo é **conteúdo**. Só mexa se a tarefa for explicitamente "adicionar/alt
 |---|---|---|
 | O usuário colou um texto e quer ele limpo | **uso** | aplique `SKILL.md` ao texto dele |
 | O usuário fala em regra, AI-N, caso de teste, catálogo, README, publicar | **desenvolvimento** | siga este arquivo; não reescreva nada do repo |
-| Você está prestes a editar `SKILL.md` / `skills/references/` / `tests/` | **desenvolvimento** | sempre |
+| Você está prestes a editar `skills/deai-text/` (SKILL.md, references/) / `tests/` | **desenvolvimento** | sempre |
 
 Na dúvida, pergunte.
 
@@ -69,11 +69,14 @@ o runner só diz que a regra não disparou, não por quê.
 
 | Item | Por quê |
 |---|---|
-| `description` do frontmatter | É o que faz a skill disparar. Alterar muda quando ela é invocada. |
+| `description` do frontmatter | É o que faz a skill disparar. Alterar muda quando ela é invocada. Ela abre com o gatilho (`Use when…`) porque o Hermes mostra só os primeiros ~60 caracteres na lista de skills, e fica abaixo de 1.024 caracteres porque o Copilot CLI e o Hermes descartam a skill acima disso. Aspas simples dentro dela: aspas duplas viram `&quot;` no Copilot e no OpenClaw. |
+| Tamanho do `SKILL.md` | Abaixo de 15.000 caracteres. Acima disso o OpenClaw, em modelo de contexto menor que 100K tokens, recusa a leitura ou entrega o arquivo cortado. Catálogo e checklist novos vão para `references/`. |
+| `metadata` do frontmatter | Só valores string (`version: "0.3.0"`, `tags: "a, b"`). O Hermes recusa a skill inteira se um valor de `metadata` for lista ou número. |
+| Versão | Mesma em `metadata.version`, `.claude-plugin/plugin.json` e `plugin.json`. `tools/build.py --verificar` reprova divergência. |
 | Numeração `AI-N` | Os casos referenciam por número. Renumerar quebra todos de uma vez. |
 | Cabeçalhos numerados da saída (`## 2. Rewrite` / `## 2. Reescrita`) | O runner ancora no **número** para isolar a reescrita. Trocar o número cega o teste de falso positivo — e ele passa a dar verde. |
 | Separação `vocabulary.md` × `vocabulary-pt-br.md` | Não são traduções um do outro. Fundir os dois faz a auditoria em português procurar `delve` e a em inglês procurar `possui`. |
-| `"skills": ["."]` no `plugin.json` | É o que faz o `SKILL.md` da raiz ser descoberto quando o repo é instalado como plugin de marketplace. **`"./"` não funciona** — o campo `skills` é a exceção que aceita `"."`. Sem ele, `claude plugin details` reporta `Skills (0)` e o install entrega nada. |
+| Layout `skills/deai-text/` | Desde a v0.3 a skill mora em `skills/deai-text/`, a pasta padrão que Claude Code, Codex, Copilot CLI, OpenClaw e Hermes leem num plugin. O `.claude-plugin/plugin.json` não declara `skills`: a pasta padrão basta. Até a v0.2 o `SKILL.md` ficava na raiz com `"skills": ["."]`, e o Hermes (Agent Plugins v1) não aceita esse campo nem skill fora de `skills/<nome>/`. |
 | Seção "O que NÃO é erro" (`vocabulary-pt-br.md`) | É o que impede a skill de virar corretor que conserta português correto. |
 
 ## Verificação
@@ -87,7 +90,7 @@ DEAI_TENTATIVAS=1 ./init.sh        # sem retry (para medir flakiness)
 DEAI_TIMEOUT=600 ./init.sh         # timeout por chamada (default: 300s)
 ```
 
-O runner concatena `SKILL.md` + `skills/references/*.md` **deste repo** e manda para `claude -p`. Ele testa
+O runner concatena `SKILL.md` + `references/*.md` de `skills/deai-text/` **deste repo** e manda para `claude -p`. Ele testa
 o arquivo que você acabou de editar, não a cópia instalada em `~/.claude/skills/`.
 
 Ele **não compara texto** — output de LLM não é determinístico, e aqui o produto é prosa reescrita,
@@ -193,7 +196,7 @@ nenhum: ele conta como cobertura.
 ## O que o harness NÃO cobre
 
 A suíte testa o comportamento **dado que** a skill disparou — o runner injeta `SKILL.md` +
-`skills/references/*.md` no prompt por stdin. Ela não testa **se** a skill dispara.
+`references/*.md` no prompt por stdin. Ela não testa **se** a skill dispara.
 
 Isso deixa o `description` do frontmatter sem verificação nenhuma, e ele é justamente o campo que
 esta AGENTS.md manda não mexer sem intenção. Uma edição que estreite o `description` passa por toda
@@ -222,22 +225,27 @@ Estado entre rodadas em `loops/loop-state.md`.
 ## Estrutura
 
 ```
-SKILL.md                       # 12 IDs, método de detecção, formato de saída
-skills/references/
-  vocabulary.md                # níveis 1/2/3 em inglês
-  vocabulary-pt-br.md          # níveis 1/2/3 em português + gerúndio, cópula, decalque
-  constructions.md             # 31 construções estruturais
-  fiction-phrases.md           # descrição física, metáfora morta, clichê
-  nonfiction-patterns.md       # formatação, transição, artefato de assistente
+skills/deai-text/              # a skill instalável
+  SKILL.md                     # 12 IDs, método de detecção, formato de saída
+  references/
+    vocabulary.md              # níveis 1/2/3 em inglês
+    vocabulary-pt-br.md        # níveis 1/2/3 em português + gerúndio, cópula, decalque
+    constructions.md           # 31 construções estruturais
+    fiction-phrases.md         # descrição física, metáfora morta, clichê
+    nonfiction-patterns.md     # formatação, transição, artefato de assistente
+    detection-checklists.md    # checklist de ficção e de não ficção (saiu do SKILL.md na v0.3)
+.claude-plugin/                # plugin.json + marketplace.json: Claude Code, Codex, Copilot CLI, OpenClaw
+plugin.json                    # manifesto Agent Plugins v1: Hermes (mesma versão do outro)
+tools/build.py                 # gera prompts/bundle.md; --verificar confere prompts e versões
 tests/
   verify.py                    # runner (Python 3 stdlib, sem dependências)
   casos/*.md                   # casos de regressão
 loops/
   goal-cobertura.md            # goal loop: matriz AI-N × (positivo, contra-teste)
   loop-state.md                # estado entre rodadas + achados abertos
-skills/prompts/                       # prompts avulsos para LLM sem suporte a skills
+prompts/                       # prompts avulsos para LLM sem suporte a skills
 init.sh                        # checa pré-requisitos e roda o verify
 AGENTS.md                      # este arquivo
 ```
 
-Só `SKILL.md` e `skills/references/*.md` vão para o prompt. O resto é harness.
+Só `skills/deai-text/SKILL.md` e `skills/deai-text/references/*.md` vão para o prompt. O resto é harness.

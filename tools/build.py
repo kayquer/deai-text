@@ -3,7 +3,7 @@
 
 Duas coisas, e só duas:
 
-  bundle       SKILL.md + skills/references/*.md achatados num arquivo só, para colar em
+  bundle       skills/deai-text/SKILL.md + references/*.md achatados num arquivo só, para colar em
                LLM que não tem suporte a skill. É GERADO — não edite `bundle.md`.
 
   --verificar  confere que os prompts avulsos (`standalone-*.md`), que são
@@ -21,16 +21,19 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
-BUNDLE = REPO / "skills" / "prompts" / "bundle.md"
+# Layout de plugin: Claude Code, Codex, Hermes e OpenClaw acham a skill aqui.
+SKILL = REPO / "skills" / "deai-text"
+PROMPTS = REPO / "prompts"
+BUNDLE = PROMPTS / "bundle.md"
 AVULSOS = ["standalone-en.md", "standalone-pt-br.md"]
 
 CABECALHO = """<!-- GERADO por tools/build.py — não edite este arquivo.
-     Edite SKILL.md / skills/references/*.md e rode `python3 tools/build.py`. -->
+     Edite skills/deai-text/SKILL.md / references/*.md e rode `python3 tools/build.py`. -->
 
 # deai-text — bundle completo
 
 A skill inteira num arquivo só, para colar como system prompt em qualquer LLM.
-Onde o texto abaixo mandar "read `skills/references/X.md`", a seção correspondente já
+Onde o texto abaixo mandar "read `references/X.md`", a seção correspondente já
 está neste mesmo arquivo, mais abaixo.
 
 ---
@@ -39,7 +42,7 @@ está neste mesmo arquivo, mais abaixo.
 
 
 def fontes():
-    partes = [REPO / "SKILL.md"] + sorted((REPO / "skills" / "references").glob("*.md"))
+    partes = [SKILL / "SKILL.md"] + sorted((SKILL / "references").glob("*.md"))
     faltando = [p for p in partes if not p.exists()]
     if faltando:
         sys.exit(f"erro: arquivo da skill não encontrado: {faltando[0]}")
@@ -58,7 +61,7 @@ def gerar():
 
 
 def ids_do_skill():
-    ids = set(re.findall(r"\bAI-(\d+)\b", (REPO / "SKILL.md").read_text(encoding="utf-8")))
+    ids = set(re.findall(r"\bAI-(\d+)\b", (SKILL / "SKILL.md").read_text(encoding="utf-8")))
     if not ids:
         sys.exit("erro: SKILL.md não tem nenhum ID AI-N. O formato mudou?")
     return sorted(ids, key=int)
@@ -73,17 +76,29 @@ def verificar():
     elif BUNDLE.read_text(encoding="utf-8") != esperado:
         problemas.append(f"{BUNDLE.relative_to(REPO)} está defasado — rode `python3 tools/build.py`")
 
+    # `.claude-plugin/plugin.json` serve Claude Code, Codex, Copilot CLI e
+    # OpenClaw; `plugin.json` (Agent Plugins v1) serve o Hermes. Dois arquivos
+    # com a mesma versão divergem no primeiro bump feito à mão.
+    import json
+    frente = (SKILL / "SKILL.md").read_text(encoding="utf-8").split("\n---", 1)[0]
+    achou = re.search(r'^\s+version:\s*"?([^"\n]+)"?\s*$', frente, re.MULTILINE)
+    versoes = {"SKILL.md metadata.version": achou.group(1) if achou else None}
+    for manifesto in (".claude-plugin/plugin.json", "plugin.json"):
+        versoes[manifesto] = json.loads((REPO / manifesto).read_text(encoding="utf-8")).get("version")
+    if None in versoes.values() or len(set(versoes.values())) != 1:
+        problemas.append(f"versões divergentes: {versoes}")
+
     ids = ids_do_skill()
     for nome in AVULSOS:
-        caminho = REPO / "skills" / "prompts" / nome
+        caminho = PROMPTS / nome
         if not caminho.exists():
-            problemas.append(f"skills/prompts/{nome} não existe")
+            problemas.append(f"prompts/{nome} não existe")
             continue
         texto = caminho.read_text(encoding="utf-8")
         faltando = [f"AI-{n}" for n in ids if f"AI-{n}" not in texto]
         if faltando:
             problemas.append(
-                f"skills/prompts/{nome} não cita {', '.join(faltando)} — "
+                f"prompts/{nome} não cita {', '.join(faltando)} — "
                 f"regra nova no SKILL.md que não chegou no prompt avulso")
 
     if problemas:

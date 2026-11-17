@@ -69,6 +69,13 @@ que travessão em rajada continua sendo marcado.
 
 (Só o A-2. Ver "descartado" abaixo.)
 
+**Remedido em 2026-11-16, `DEAI_TENTATIVAS=1`, sonnet:** `main` 2/5, branch `compat-harnesses` 0/5
+(v0.3: `SKILL.md` em `skills/deai-text/`, checklists de gênero movidos sem mudança de texto para
+`references/detection-checklists.md`). O caso piorou também no `main` (era 4/5), e 2/5 × 0/5 com
+5 amostras não separa as duas versões. A linha "em dash overuse (target: zero…)" mudou de posição no
+prompt e pode pesar mais agora. O conserto continua sendo o do A-2, e o gate dele passa a valer
+também para o merge da v0.3.
+
 ## Achado descartado pela medição
 
 ### `AI-7` — **não é achado**
